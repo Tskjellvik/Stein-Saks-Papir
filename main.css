@@ -1,0 +1,30 @@
+body, h1, h3, p{
+    text-align: center;
+    padding: 15px;
+}
+
+h3{
+    background-color: yellow;
+    display: inline-block;
+}
+
+#home{
+    align-items: top;
+    align-items: left;
+    display: inline-block;
+}
+
+#objects{
+}
+
+#Papir{
+    display: inline-block;
+}
+
+#Stein{
+    display: inline-block;
+}
+    
+#Saks{
+    display: inline-block;
+}
