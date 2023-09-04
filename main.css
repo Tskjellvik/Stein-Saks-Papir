@@ -14,7 +14,7 @@ h3{
     display: inline-block;
 }
 
-#objects{
+.objects{
 }
 
 #Papir{
@@ -24,7 +24,10 @@ h3{
 #Stein{
     display: inline-block;
 }
-    
+
 #Saks{
     display: inline-block;
+}
+
+#start{
 }
