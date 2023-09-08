@@ -3,6 +3,7 @@ let brukerans = 0
 let stein = 1
 let saks = 2
 let papir = 3
+let roll = true;
 
 const selectionStart = document.querySelector("#start")
 const selectionStein = document.querySelector("#Stein")
@@ -17,7 +18,7 @@ const aiValg = Math.random();
 function handleClicks() {
     console.log("Spillet starter nå!")
     selectionStart.style.display = "none";
-    Countdown(5)
+    Countdown(6)
 }
 
 selectionStart.addEventListener("click", handleClicks)
@@ -51,22 +52,25 @@ selectionPapir.addEventListener("click", handleClicker)
 
 //Countdown
 function Countdown(arg) {
-     if(arg >= 1){
+    if(arg >= 1){
+        
+        const rollinterval = multiRoll(4)
         setTimeout(() => {
             console.log(arg);
             arg--;
             Countdown(arg)
             TimerCount.textContent = `${arg}`
-            multiRoll()
+            if (arg == 0) {
+                console.log("Checking Answer");
+                choiceCheckPapir()
+                choiceCheckSaks()
+                choiceCheckStein()
+                botSvar()
+                rightBotPick()
+                console.log("Bot answer er ", botans)
+                //clearInterval(rollinterval)
+            }
         }, 1000);
-    }
-    if (arg == 0) {
-        console.log("Checking Answer");
-        choiceCheckPapir()
-        choiceCheckSaks()
-        choiceCheckStein()
-        botSvar()
-        console.log("Bot answer er ", botans)
     }
 };
 
@@ -133,18 +137,38 @@ function botSvar(){
 function botRoll(){
     let x = Math.floor(Math.random() *3)
 
-    if(x == 1){
+    if(x == 0){
         aiValgPick.src = "./Imeges/Stein.jpg"
     }
-    if(x == 2){
+    if(x == 1){
         aiValgPick.src = "./Imeges/Saks.jpg"
     }
-    if(x == 3){
+    if(x == 2){
         aiValgPick.src = "./Imeges/Papir.jpg"
     }
 }
 
 //roll mange ganger funksjon
-function multiRoll(){
+function multiRoll(inpt){
+    let intervals = inpt
+    const rollinterval = setInterval(() => {
+        botRoll()
+        --intervals
+        if (intervals <= 1) {
+            clearInterval(rollinterval)
+        }
+    }, 1000/inpt);
+    return rollinterval
+}
+
+//display av ai riktig valg bilde 
+function rightBotPick() {
+    if (robovalg == stein) {
+        aiValgPick.src = "./Imeges/Stein.jpg"
+    } else if (robovalg == saks) {
+        aiValgPick.src = "./Imeges/Saks.jpg"
+    } else if (robovalg == papir) {
+        aiValgPick.src = "./Imeges/Papir.jpg"
+    }
     
 }
